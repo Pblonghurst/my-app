@@ -1,7 +1,6 @@
 # Open the terminal
-Navigate into root folder of API, and run the follwing commands 
+Navigate into root of my-app folder, 
 ## npm Install 
 Installs package and it's dependancies
-## node . 
-This will start up start up server on localhost port 8080 and connect to database
-The port is defined at the top of index.js and called at the bottom should you wish to change this
+## npm start
+This will start up start up server on localhost port 3000 
