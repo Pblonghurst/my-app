@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import './scripts.js';
 
 function App() {
   return (
@@ -12,7 +11,7 @@ function App() {
         {/* results */}
         <div id="user-info">
           User Info:
-          <p id="card-id"></p> sas
+          <p id="card-id"></p> 
           <p id="name"></p>
           <p id="email"></p>
           <p id="tel"></p>
@@ -30,19 +29,9 @@ function App() {
         </a>
 
         {/* reveal info */}
-        <label>Login to display info above!</label>
+        <label>Display first user info above!</label>
         <button onClick={display}>
           Reveal
-        </button> 
-
-        {/* login inputs */}
-        <label>Login Here!</label>
-        <div className="login-inputs">
-          <input id="l-id" placeholder="card id"/>
-          <input id="l-pass" placeholder="password"/>
-        </div>
-        <button onClick={login}>
-          Login
         </button> 
 
         {/* register inputs */}
@@ -74,9 +63,12 @@ function register() {
   let email = document.getElementById('r-email').value
   let tel = document.getElementById('r-tel').value
   let pass = document.getElementById('r-pass').value
-  console.log(pass, tel, email, name, card);
 
   fetch('http://localhost:8080/api/user/register', {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
     method: 'POST', 
     body: JSON.stringify({
       id: card,
@@ -87,35 +79,14 @@ function register() {
     })
   }).then(res => {
     return res.json();
-  })
-  .then(data => console.log(data))
-  .catch(err => console.log(err))
+  }).then(data => 
+    console.log(data)
+    );
 }
-
-// logins in an existing user
-function login() {
-  let card = document.getElementById('l-id').value
-  let pass = document.getElementById('l-pass').value
-  console.log(card, pass)
-
-fetch('http://localhost:8080/api/user/login', {
-  method: 'POST', 
-  headers: {
-    Accept: "application/json, text/plain, */*",
-    "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      id: card,
-      password: pass
-    })
-  }).then(res => {
-    return res.text();
-  })
-};
 
 // displays user info if logged in 
 function display() {
-  fetch('http://localhost:8080/api/user/profile')
+  fetch('http://localhost:8080/api/user/allusers')
   .then(res => {
     return res.json();
   })
